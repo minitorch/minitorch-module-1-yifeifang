@@ -41,9 +41,12 @@ class Linear(minitorch.Module):
                 )
             )
 
-    def forward(self, inputs):
-        return inputs @ self.weight + self.bias
-
+    def forward(self, inputs): 
+        result = []
+        for outIdx, b in enumerate(self.bias):
+            for input, w in zip(inputs, self.weights[outIdx]):
+                result.append(input * w.value + b.value)
+        return result
 
 def default_log_fn(epoch, total_loss, correct, losses):
     print("Epoch ", epoch, " loss ", total_loss, "correct", correct)
