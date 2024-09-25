@@ -45,7 +45,7 @@ def mul(x: float, y: float) -> float:
     Returns:
         float: The product of x and y.
     """
-    return x * y
+    return float(x * y)
 
 def id(x: float) -> float:
     """
@@ -57,7 +57,7 @@ def id(x: float) -> float:
     Returns:
         float: The same number x.
     """
-    return x
+    return float(x)
 
 def add(x: float, y: float) -> float:
     """
@@ -70,7 +70,7 @@ def add(x: float, y: float) -> float:
     Returns:
         float: The sum of x and y.
     """
-    return x + y
+    return float(x + y)
 
 def neg(x: float) -> float:
     """
@@ -82,7 +82,7 @@ def neg(x: float) -> float:
     Returns:
         float: The negation of x.
     """
-    return -x
+    return float(-x)
 
 def lt(x: float, y: float) -> bool:
     """
@@ -121,7 +121,7 @@ def max(x: float, y: float) -> float:
     Returns:
         float: The maximum of x and y.
     """
-    return x if x > y else y
+    return float(x) if x > y else float(y)
 
 def is_close(x: float, y: float) -> bool:
     """
@@ -146,7 +146,7 @@ def sigmoid(x: float) -> float:
     Returns:
         float: The sigmoid of x.
     """
-    return 1 / (1 + math.exp(-x))
+    return float(1 / (1 + math.exp(-x)))
 
 def relu(x: float) -> float:
     """
@@ -158,7 +158,7 @@ def relu(x: float) -> float:
     Returns:
         float: The ReLU of x (max(0, x)).
     """
-    return max(0, x)
+    return float(max(0.0, x))
 
 def log(x: float) -> float:
     """
@@ -170,7 +170,7 @@ def log(x: float) -> float:
     Returns:
         float: The natural logarithm of x.
     """
-    return math.log(x)
+    return float(math.log(x))
 
 def exp(x: float) -> float:
     """
@@ -182,7 +182,7 @@ def exp(x: float) -> float:
     Returns:
         float: e raised to the power of x.
     """
-    return math.exp(x)
+    return float(math.exp(x))
 
 def inv(x: float) -> float:
     """
@@ -194,7 +194,7 @@ def inv(x: float) -> float:
     Returns:
         float: The reciprocal of x (1/x).
     """
-    return 1 / x
+    return float(1 / x)
 
 def log_back(x: float, d: float) -> float:
     """
@@ -207,7 +207,7 @@ def log_back(x: float, d: float) -> float:
     Returns:
         float: The derivative of log(x) multiplied by d.
     """
-    return d / x
+    return float(d / x)
 
 def inv_back(x: float, d: float) -> float:
     """
@@ -220,7 +220,7 @@ def inv_back(x: float, d: float) -> float:
     Returns:
         float: The derivative of 1/x multiplied by d.
     """
-    return -d / (x * x)
+    return float(-d / (x * x))
 
 def relu_back(x: float, d: float) -> float:
     """
@@ -233,7 +233,7 @@ def relu_back(x: float, d: float) -> float:
     Returns:
         float: The derivative of ReLU(x) multiplied by d.
     """
-    return d if x > 0 else 0
+    return float(d) if x > 0 else float(0.0)
 
 
 # ## Task 0.3

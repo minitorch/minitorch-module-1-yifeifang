@@ -3,6 +3,8 @@ from typing import Any, Iterable, List, Tuple
 
 from typing_extensions import Protocol
 
+import copy
+
 # ## Task 1.1
 # Central Difference calculation
 
@@ -22,8 +24,25 @@ def central_difference(f: Any, *vals: Any, arg: int = 0, epsilon: float = 1e-6) 
     Returns:
         An approximation of $f'_i(x_0, \ldots, x_{n-1})$
     """
-    # TODO: Implement for Task 1.1.
-    raise NotImplementedError("Need to implement for Task 1.1")
+    # Convert vals to a list for easier manipulation
+    vals_list = list(vals)
+
+    # Create two copies of the input values
+    vals_plus = copy.deepcopy(vals_list)
+    vals_minus = copy.deepcopy(vals_list)
+
+    # Modify the argument of interest by epsilon
+    vals_plus[arg] += epsilon
+    vals_minus[arg] -= epsilon
+
+    # Compute f(x + epsilon) and f(x - epsilon)
+    f_plus = f(*vals_plus)
+    f_minus = f(*vals_minus)
+
+    # Compute the central difference approximation
+    derivative = (f_plus - f_minus) / (2 * epsilon)
+
+    return derivative
 
 
 variable_count = 1
