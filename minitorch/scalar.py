@@ -101,7 +101,7 @@ class Scalar:
         return LT.apply(self, b)
 
     def __gt__(self, b: ScalarLike) -> Scalar:
-        return Scalar(1.0) if not (LT.apply(self, b) or EQ.apply(self, b)) else Scalar(0.0)
+        return LT.apply(b, self)
 
     def __eq__(self, b: ScalarLike) -> Scalar:  # type: ignore[override]
         return EQ.apply(self, b)
