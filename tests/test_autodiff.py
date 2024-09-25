@@ -74,7 +74,7 @@ def test_chain_rule3() -> None:
     back = list(back)
     assert len(back) == 2
     variable, deriv = back[1]
-    # assert variable.name == var.name
+    assert variable.name == var.name
     assert deriv == 5 * 10
 
 
