@@ -164,7 +164,12 @@ class Scalar:
         assert h.ctx is not None
 
         result = []
-        result.append()
+        (d1, d2) = h.last_fn.backward(h.ctx, d_output)
+        if d1:
+            result.append((self.parents[0], d1))
+        if d2:
+            result.append((self.parents[1], d2))
+        return result
         
     def backward(self, d_output: Optional[float] = None) -> None:
         """
