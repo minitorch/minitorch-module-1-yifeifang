@@ -4,6 +4,7 @@ from typing import Any, Iterable, List, Tuple
 from typing_extensions import Protocol
 
 import copy
+import queue
 
 # ## Task 1.1
 # Central Difference calculation
@@ -80,8 +81,21 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     Returns:
         Non-constant Variables in topological order starting from the right.
     """
-    # TODO: Implement for Task 1.4.
-    raise NotImplementedError("Need to implement for Task 1.4")
+    visited = set()
+    result = []
+
+    def dfs(node):
+        if node.unique_id in visited:
+            return
+        visited.add(node.unique_id)
+        
+        for parent in node.parents:
+            dfs(parent)
+        
+        result.append(node)
+
+    dfs(variable)
+    return list(reversed(result))
 
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
@@ -95,9 +109,17 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
 
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
-    # TODO: Implement for Task 1.4.
-    raise NotImplementedError("Need to implement for Task 1.4")
-
+    sorted_list = topological_sort(variable)
+    var_dict = {}
+    var_dict[sorted_list[0].unique_id] = deriv
+    for node in sorted_list:
+        if node.is_leaf():
+            node.accumulate_derivative(var_dict[node.unique_id])
+            continue
+        for d,p in zip(node.chain_rule(var_dict[node.unique_id]), node.parents):
+            if p.unique_id not in var_dict:
+                var_dict[p.unique_id] = 0.0
+            var_dict[p.unique_id] += d[1]
 
 @dataclass
 class Context:
