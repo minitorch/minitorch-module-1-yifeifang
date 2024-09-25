@@ -163,7 +163,7 @@ class ReLU(ScalarFunction):
     @staticmethod
     def backward(ctx: Context, d_output: float) -> float:
         (a,) = ctx.saved_values
-        return operators.relu_back(a)
+        return operators.relu_back(a, d_output)
 
 class Exp(ScalarFunction):
     "Exp function"
